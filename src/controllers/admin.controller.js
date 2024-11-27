@@ -3,6 +3,17 @@ const Order = require("../models/order.js")
 const Report = require("../models/report.js")
 const DB = require('../pseudo-databasejs.js')
 
+const viewPrinter = async (req, res) => {
+    const body = req.body
+    try {
+        const printer = await Printer.findAll()
+        res.status(201).json(printer);
+    } catch (e) {
+        res.status(400).json({ message: "Adding printer failed!" });
+        console.log(e)
+    }
+} 
+
 const addPrinter = async (req, res) => {
     const body = req.body
     try {
@@ -63,14 +74,23 @@ const confirmOrder = async (req, res) => {
     const body = req.body
     try {
         const find_filter = { "name": body.ObjectID }
-        const update_filter = {
-            'confirmedByAdmin': true
-        }
+        const update_filter = { 'confirmedByAdmin': true }
         const option_filer = { "new": true }
         const order = await Order.findOneAndUpdate(find_filter, update_filter, option_filer)
         if (!order) {
             res.status(404).json({ message: "Order not exist!" })
         }
+        res.status(200).json(order)
+    } catch (e) {
+        res.status(400).json({ message: "Adding printer failed!" });
+        console.log(e)
+    }
+}
+
+const viewOrder = async (req, res) => {
+    const body = req.body
+    try {
+        const order = await Order.findAll()
         res.status(200).json(order)
     } catch (e) {
         res.status(400).json({ message: "Adding printer failed!" });
@@ -105,9 +125,11 @@ const resolveReport = async (req, res) => {
 }
 
 module.exports = {
+    viewPrinter,
     addPrinter,
     deletePrinter,
     editPrinter,
+    viewOrder,
     confirmOrder,
     viewReport,
     resolveReport
