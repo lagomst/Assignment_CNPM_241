@@ -2,8 +2,10 @@
 
 Tools để host dành cho backend để frontend lấy API: https://render.com/
 
-Backend làm bằng: Nodejs.
+Backend làm bằng: Nodejs + MongoDB
 
-Frontend làm bằng: React.
+# Installation
+Run 'npm install package.json'
 
-Link figma: https://www.figma.com/design/vosnnO4s3loW7EVWKAZ3Wn/CNPM-2.4?node-id=0-1&t=Kqt0gAscu4EEJ14r-1
+# Running
+Run app.js in src directory.
